@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tarto">
+        <h1>Kerdes1?</h1>
+        <input onclick="Jelölés(1)" type="radio" name="valasz1" id="jelolesek1">
+        <label id="jeloles1" for="jeloles1">valasz1</label><br>
+        <input onclick="Jelölés(2)" type="radio" name="valasz2" id="jelolesek2">
+        <label id="jeloles2" for="jeloles2">valasz2</label><br>
+        <input onclick="Jelölés(3)" type="radio" name="valasz3" id="jelolesek3">
+        <label id="jeloles3" for="jeloles3">valasz3</label><br>
+        <input onclick="Jelölés(4)" type="radio" name="valasz4" id="jelolesek4" value="jo">
+        <label id="jeloles4" for="jeloles4">valasz4</label><br>
+    </div>
+</body>
+<script src="kerdesek.js"></script>
+<script>
+    var kerdessorozat = 0
+    var pontszam = 0
+    function Tolt() {       
+        document.getElementById("tarto").innerHTML = "<h1>"+kerdesek[kerdessorozat].kerdes+"</h1>"
+        for (let i = 1; i < 5; i++) {
+            document.getElementById("tarto").innerHTML += '<input onclick="Jelölés('+i+')" type="radio" name="valasz'+i+'" id="jelolesek'+i+'"><label id="jeloles'+i+'" for="jeloles'+i+'">'+kerdesek[kerdessorozat].valaszok[i-1]+'</label><br>'        
+        }
+    }
+    Tolt()
+    function Jelölés(sorszam) {
+        var valasz = document.getElementById("jeloles"+ sorszam).innerHTML
+        if(valasz == kerdesek[kerdessorozat].jovalasz){
+            alert("jo")
+            pontszam++
+        }
+        else{
+            alert("nem jo")
+        }
+        kerdessorozat++
+        if(kerdessorozat < 4){
+            Tolt()
+        }else{
+            Eredmeny()
+        }
+    }
+    function Eredmeny() {
+        if(pontszam < 3){
+            alert("Még gyakorolj")
+        }else if(pontszam == 4){
+            alert("Gratulálok! Hibátlan megoldás")
+        }
+        else{
+            alert("Már nem sikerült rosszul")
+        }
+    }
+</script>
+</html>
